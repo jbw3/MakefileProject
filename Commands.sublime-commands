@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "Makefile Project: Create Makefile",
+        "command": "makefile_create"
+    },
+    {
+        "caption": "Makefile Project: Add file to Makefile",
+        "command": "makefile_add_file"
+    }
+]
