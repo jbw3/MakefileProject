@@ -1,0 +1,14 @@
+{
+    "templates":
+    {
+        "C":
+        {
+            "filename": "makefile_c"
+        },
+
+        "C++":
+        {
+            "filename": "makefile_c++"
+        }
+    }
+}
