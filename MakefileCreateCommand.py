@@ -1,7 +1,5 @@
-import os
-import sublime
+import os, textwrap
 import sublime_plugin
-import textwrap
 
 def reformat(template):
     return textwrap.dedent(template).lstrip()
@@ -34,7 +32,7 @@ class MakefileCreateCommand(sublime_plugin.WindowCommand):
     $(TARGET): $(OBJ)
     \t$(CXX) $(OBJ) -o $(TARGET) $(LDFLAGS)
 
-    $(OBJDIR)/%.o: %.cpp $(DEPS)
+    $(OBJDIR)/%.cpp.o: %.cpp $(DEPS)
     \t$(CXX) $(CXXFLAGS) -c $< -o $@
 
     .PHONY: clean
