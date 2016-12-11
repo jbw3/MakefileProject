@@ -1,0 +1,17 @@
+[
+    {
+        "caption": "Makefile",
+        "id": "makefile",
+        "children":
+        [
+            {
+                "caption": "Add File",
+                "command": "makefile_add_file",
+                "args":
+                {
+                    "paths": []
+                }
+            }
+        ]
+    }
+]
