@@ -1,4 +1,4 @@
-import os, textwrap
+import os, shutil, textwrap
 import sublime, sublime_plugin
 
 def reformat(template):
@@ -115,21 +115,26 @@ class MakefileCreateCommand(sublime_plugin.WindowCommand):
     def createMakefile(self, templateFilename, filename):
         ''' Create the makefile. '''
         # TODO: validate filename
-        # TODO: check if file already exists
         if filename == '':
             return
 
+        # check if file already exists
+        if os.path.exists(filename):
+            ok = sublime.ok_cancel_dialog('This makefile already exists. OK to overwrite?')
+            if not ok:
+                return
+
         # ensure default files exist
-        # TODO: Is there a better place to call this?
+        # TODO: Call this when plugin is loaded
         self.createDefaultFiles()
 
         templatePath = os.path.join(self.PLUGIN_PATH, templateFilename)
 
-        # TODO: Should probably just copy the file
-        with open(templatePath, 'r') as fin, open(filename, 'w') as fout:
-            fout.write(fin.read())
+        # copy the file
+        shutil.copy(templatePath, filename)
 
     def createDefaultFiles(self):
+        ''' Create default makefile templates. '''
         os.makedirs(self.PLUGIN_PATH, exist_ok=True)
 
         # loop through all default files and create any that
