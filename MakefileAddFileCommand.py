@@ -1,5 +1,6 @@
-import os, re, tempfile
+import os
 import sublime, sublime_plugin
+from MakefileProject.MakefileParser import MakefileParser
 
 class MakefileAddFileCommand(sublime_plugin.WindowCommand):
     def run(self, paths=[]):
@@ -30,19 +31,5 @@ class MakefileAddFileCommand(sublime_plugin.WindowCommand):
         for path in paths:
             filenames.append(os.path.basename(path) + '.o')
 
-        with open(makefile, 'r') as fin, tempfile.NamedTemporaryFile(dir=os.path.dirname(makefile), delete=False) as fout:
-            line = fin.readline()
-            while line != '':
-                match = re.search(r'^_OBJ\s*=', line)
-                if match is not None:
-                    out = '{} {}\n'.format(line.rstrip(), ' '.join(filenames))
-                else:
-                    out = line
-
-                # TODO: Use other encoding? Does Sublime have a default encoding in settings?
-                out = bytes(out, 'UTF-8')
-                fout.write(out)
-                line = fin.readline()
-
-        # atomically replace original file
-        os.replace(fout.name, makefile)
+        parser = MakefileParser(makefile)
+        parser.addFiles(filenames)
