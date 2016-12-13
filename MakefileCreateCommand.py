@@ -14,7 +14,7 @@ class MakefileCreateCommand(sublime_plugin.WindowCommand):
     CC = gcc
     CFLAGS = $(INCLUDES)
 
-    LDLIBS = -L<lib path> -l<lib name>
+    LDLIBS =
     LDFLAGS = $(LDLIBS)
 
     DEPS =
@@ -49,7 +49,7 @@ class MakefileCreateCommand(sublime_plugin.WindowCommand):
     CXX = g++
     CXXFLAGS = $(INCLUDES)
 
-    LDLIBS = -L<lib path> -l<lib name>
+    LDLIBS =
     LDFLAGS = $(LDLIBS)
 
     DEPS =
