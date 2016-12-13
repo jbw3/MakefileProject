@@ -1,5 +1,6 @@
 import os, shutil, textwrap
 import sublime, sublime_plugin
+from MakefileProject.utils import *
 
 def reformat(template):
     return textwrap.dedent(template).lstrip()
@@ -81,8 +82,6 @@ class MakefileCreateCommand(sublime_plugin.WindowCommand):
         'makefile_c++' : CPP_DEFAULT_MAKEFILE,
     }
 
-    PLUGIN_PATH = os.path.join(sublime.packages_path(), 'User', 'MakefileProject')
-
     def run(self):
         ''' Run the command. '''
         self.getMakefileType()
@@ -128,19 +127,19 @@ class MakefileCreateCommand(sublime_plugin.WindowCommand):
         # TODO: Call this when plugin is loaded
         self.createDefaultFiles()
 
-        templatePath = os.path.join(self.PLUGIN_PATH, templateFilename)
+        templatePath = os.path.join(getPluginUserDir(), templateFilename)
 
         # copy the file
         shutil.copy(templatePath, filename)
 
     def createDefaultFiles(self):
         ''' Create default makefile templates. '''
-        os.makedirs(self.PLUGIN_PATH, exist_ok=True)
+        os.makedirs(getPluginUserDir(), exist_ok=True)
 
         # loop through all default files and create any that
         # don't already exist
         for filename, contents in MakefileCreateCommand.DEFAULT_MAKEFILES.items():
-            filePath = os.path.join(self.PLUGIN_PATH, filename)
+            filePath = os.path.join(getPluginUserDir(), filename)
             if not os.path.exists(filePath):
                 with open(filePath, 'w') as f:
                     f.write(contents)
