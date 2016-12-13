@@ -6,5 +6,9 @@
     {
         "caption": "Makefile Project: Add file to Makefile",
         "command": "makefile_add_file"
+    },
+    {
+        "caption": "Makefile Project: Remove file from Makefile",
+        "command": "makefile_remove_file"
     }
 ]

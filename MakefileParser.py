@@ -7,6 +7,7 @@ class MakefileParser(object):
         self.makefile = makefile
 
     def addFiles(self, filenames):
+        ''' Add filenames to the makefile. '''
         def processFiles(makefileFilenames):
             for filename in filenames:
                 if filename not in makefileFilenames:
@@ -17,8 +18,16 @@ class MakefileParser(object):
         self._process(processFiles)
 
     def removeFiles(self, filenames):
-        # TODO
-        pass
+        ''' Remove filenames from the makefile. '''
+        def processFiles(makefileFilenames):
+            for filename in filenames:
+                try:
+                    makefileFilenames.remove(filename)
+                except ValueError:
+                    # ignore if filename is not in makefile
+                    pass
+
+        self._process(processFiles)
 
     def _process(self, processFiles):
         pattern = re.compile(r'^_OBJ[ \t]*=[ \t]*')

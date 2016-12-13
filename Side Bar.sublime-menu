@@ -11,6 +11,14 @@
                 {
                     "paths": []
                 }
+            },
+            {
+                "caption": "Remove File",
+                "command": "makefile_remove_file",
+                "args":
+                {
+                    "paths": []
+                }
             }
         ]
     }
