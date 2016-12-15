@@ -1,10 +1,12 @@
 import os, re, tempfile
+from MakefileProject.utils import *
 
 class MakefileParser(object):
     SPLIT_PATTERN = re.compile(r'[\s\\]+')
 
     def __init__(self, makefile):
         self.makefile = makefile
+        self.settings = getPluginSettings()
 
     def addFiles(self, filenames):
         ''' Add filenames to the makefile. '''
@@ -12,8 +14,10 @@ class MakefileParser(object):
             for filename in filenames:
                 if filename not in makefileFilenames:
                     makefileFilenames.append(filename)
-            # TODO: Use natural sort
-            makefileFilenames.sort()
+
+            if self.settings.get('sort_filenames'):
+                # TODO: Use natural sort
+                makefileFilenames.sort()
 
         self._process(processFiles)
 
@@ -67,7 +71,11 @@ class MakefileParser(object):
 
         if varStr.endswith('='):
             varStr += ' '
-        sep = ' \\\n' + ' ' * len(varStr)
+
+        if self.settings.get('multiline_filenames'):
+            sep = ' \\\n' + ' ' * len(varStr)
+        else:
+            sep = ' '
 
         out = '{}{}\n'.format(varStr, sep.join(filenames))
 

@@ -1,4 +1,11 @@
 {
+    // Whether to sort filenames when adding them to the makefile
+    "sort_filenames": true,
+
+    // Whether to add each filename to a different line in the makefile
+    "multiline_filenames": true,
+
+    // Template makefiles. These are in Packages/User/MakefileProject
     "templates":
     {
         "C":

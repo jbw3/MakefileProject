@@ -88,7 +88,7 @@ class MakefileCreateCommand(sublime_plugin.WindowCommand):
 
     def getMakefileType(self):
         ''' Ask the user which type of makefile to create. '''
-        settings = sublime.load_settings('MakefileProject.sublime-settings')
+        settings = getPluginSettings()
         types = list(settings.get('templates').keys())
 
         def onDone(typeIdx):

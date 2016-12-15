@@ -6,6 +6,9 @@ def getPluginUserDir():
     # should not be called when the module is imported
     return os.path.join(sublime.packages_path(), 'User', 'MakefileProject')
 
+def getPluginSettings():
+    return sublime.load_settings('MakefileProject.sublime-settings')
+
 def findMakefile(window):
     projData = window.project_data()
     for folder in projData['folders']:
