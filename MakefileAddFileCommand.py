@@ -21,7 +21,7 @@ class MakefileAddFileCommand(sublime_plugin.WindowCommand):
     def addFiles(self, makefile, paths):
         filenames = []
         for path in paths:
-            filenames.append(os.path.basename(path) + '.o')
+            filenames.append(os.path.basename(path))
 
         parser = MakefileParser(makefile)
         parser.addFiles(filenames)

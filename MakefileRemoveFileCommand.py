@@ -21,7 +21,7 @@ class MakefileRemoveFileCommand(sublime_plugin.WindowCommand):
     def removeFiles(self, makefile, paths):
         filenames = []
         for path in paths:
-            filenames.append(os.path.basename(path) + '.o')
+            filenames.append(os.path.basename(path))
 
         parser = MakefileParser(makefile)
         parser.removeFiles(filenames)

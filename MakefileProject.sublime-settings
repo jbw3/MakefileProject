@@ -17,5 +17,13 @@
         {
             "filename": "makefile_c++"
         }
+    },
+
+    // A mapping of makefile variables to the types of files
+    // that should be added to them
+    "filename_variables":
+    {
+        "_OBJ": ["c", "c++", "cc", "cp", "cpp", "cxx"],
+        "DEPS": ["h", "hpp"]
     }
 }
