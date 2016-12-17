@@ -97,9 +97,19 @@ class MakefileParser(object):
         varStr = fileVarStr[:varMatch.end()]
         fileStr = fileVarStr[varMatch.end():]
 
+        formatedFilenames = []
+        for filename in newFilenames:
+            formatedFilename = filename
+            for newExt, matchExtList in self.settings.get('extensions').items():
+                for matchExt in matchExtList:
+                    if filename.endswith('.' + matchExt):
+                        formatedFilename = '{}.{}'.format(filename, newExt)
+
+            formatedFilenames.append(formatedFilename)
+
         filenames = re.split(self.SPLIT_PATTERN, fileStr)
         filenames = list(filter(lambda x: x != '', filenames))
-        processFiles(newFilenames, filenames)
+        processFiles(formatedFilenames, filenames)
 
         if varStr.endswith('='):
             varStr += ' '

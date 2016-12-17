@@ -25,5 +25,10 @@
     {
         "_OBJ": ["c", "c++", "cc", "cp", "cpp", "cxx"],
         "DEPS": ["h", "hpp"]
+    },
+
+    "extensions":
+    {
+        "o": ["c", "c++", "cc", "cp", "cpp", "cxx"]
     }
 }
